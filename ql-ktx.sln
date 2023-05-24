@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "ql-ktx\GUI.csproj", "{58216844-FEB7-4B10-8A4A-42AF75FB9D2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58216844-FEB7-4B10-8A4A-42AF75FB9D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58216844-FEB7-4B10-8A4A-42AF75FB9D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58216844-FEB7-4B10-8A4A-42AF75FB9D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58216844-FEB7-4B10-8A4A-42AF75FB9D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A3DD93F-6E39-4079-9245-8F7A3EB6EC34}
+	EndGlobalSection
+EndGlobal
