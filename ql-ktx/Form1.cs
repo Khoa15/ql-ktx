@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using DTO;
+using BLL;
 namespace ql_ktx
 {
-    public partial class Form1 : Form
+    public partial class mainFormKTX : Form
     {
-        public Form1()
+        public mainFormKTX()
         {
             InitializeComponent();
+        }
+
+        private void mainFormKTX_Load(object sender, EventArgs e)
+        {
+            SinhVien_BLL SinhVien = new SinhVien_BLL();
+            dataGridViewSinhVien.DataSource = SinhVien.Load();
         }
     }
 }
