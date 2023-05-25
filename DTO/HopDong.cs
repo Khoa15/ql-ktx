@@ -14,7 +14,7 @@ namespace DTO
         {
 
         }
-        public HopDong(string maSV, string lop, string hoTen, string diaChi, DateTime ngaySinh, bool gioiTinh, int maPhong, DateTime ngayBatDau, DateTime ngayHetHan, int trangThai, int tang, int maDay) : base(maSV, lop, hoTen, diaChi, ngaySinh, gioiTinh)
+        public HopDong(int maSV, string lop, string hoTen, string diaChi, DateTime ngaySinh, bool gioiTinh, int maPhong, DateTime ngayBatDau, DateTime ngayHetHan, int trangThai, int tang, int maDay) : base(maSV, lop, hoTen, diaChi, ngaySinh, gioiTinh)
         {
             this.MaPhong = maPhong;
             this.MaDay = maDay;

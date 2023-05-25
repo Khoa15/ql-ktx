@@ -21,13 +21,36 @@ namespace DAL
 
         public SqlConnection Conn { get => conn; set => conn = value; }
 
-        public SqlDataReader Query(string sql)
+        public SqlDataReader Select(string sql)
         {
             Conn.Open();
             SqlCommand cmd = new SqlCommand(sql, Conn);
             SqlDataReader r = cmd.ExecuteReader();
-            //Conn.Close();
             return r;
+        }
+        public int Insert(string table, string data)
+        {
+            Conn.Open();
+            string sql = $"INSERT INTO ${table} () VALUES ()";
+            SqlCommand cmd = new SqlCommand(sql, Conn);
+            return cmd.ExecuteNonQuery();
+        }
+        public int Update(string table, string data, string where)
+        {
+            Conn.Open();
+            string sql = $"UPDATE ${table} SET ${data} WHERE ${where}"; 
+            SqlCommand cmd = new SqlCommand(sql, Conn);
+            return cmd.ExecuteNonQuery();
+        }
+        public int Delete(string sql)
+        {
+            Conn.Open();
+            SqlCommand cmd = new SqlCommand(sql, Conn);
+            return cmd.ExecuteNonQuery();
+        }
+        public void Close()
+        {
+            Conn.Close();
         }
     }
 }

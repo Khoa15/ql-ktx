@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class SinhVien
+    public class SinhVien: Phong
     {
-        string maSV;
+        /// <summary>
+        /// gioiTinh {0: Nam, 1: Nữ}
+        /// </summary>
+        int maSV;
         string lop;
         string hoTen;
         string diaChi;
         DateTime ngaySinh;
         bool gioiTinh;
         public SinhVien() { }
-        public SinhVien(string maSV, string lop, string hoTen, string diaChi, DateTime ngaySinh, bool gioiTinh)
+        public SinhVien(int maSV, string lop, string hoTen, string diaChi, DateTime ngaySinh, bool gioiTinh)
         {
             this.maSV = maSV;
             this.lop = lop;
@@ -25,7 +28,7 @@ namespace DTO
             this.gioiTinh = gioiTinh;
         }
 
-        public string MaSV { get => maSV; set => maSV = value; }
+        public int MaSV { get => maSV; set => maSV = value; }
         public string Lop { get => lop; set => lop = value; }
         public string HoTen { get => hoTen; set => hoTen = value; }
         public string DiaChi { get => diaChi; set => diaChi = value; }

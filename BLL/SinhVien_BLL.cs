@@ -15,5 +15,6 @@ namespace BLL
         {
             return SinhVien.Load();
         }
+        
     }
 }

@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DayPhong.cs" />
+    <Compile Include="Dien.cs" />
     <Compile Include="HopDong.cs" />
+    <Compile Include="Nuoc.cs" />
     <Compile Include="Phong.cs" />
+    <Compile Include="DichVu.cs" />
     <Compile Include="SinhVien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
