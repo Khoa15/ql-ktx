@@ -13,9 +13,16 @@ namespace DTO
         private double giaTien;
 
         protected int ChiSoCu { get => chiSoCu; set => chiSoCu = value; }
-        protected int ChiSoMoi { get => chiSoMoi; set => chiSoMoi = value; }
+        protected int ChiSoMoi
+        {
+            get => chiSoMoi;
+            set
+            {
+                if(value < ChiSoCu) return;
+                chiSoMoi = value;
+            }
+        }
         protected double GiaTien { get => giaTien; set => giaTien = value; }
-
         public DichVu() { }
         public abstract double TinhTien();
     }

@@ -27,8 +27,8 @@ namespace ql_ktx
         {
             HopDong_BLL hopDong_bll = new HopDong_BLL();
             dsHopDong = hopDong_bll.Load(phong);
-            
             dataGridView_SinhVien.DataSource = dsHopDong;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,14 +58,13 @@ namespace ql_ktx
             message.Subject = "This is a test email";
             message.Priority = MailPriority.High;
             // Set the body.
-            message.Body = "This is the body of the email.";
-
+            message.Body = "<h1>This is the body of the email.</h1>";
+            message.IsBodyHtml= true;
             // Send the email.
             client.Send(message);
 
             // Display a message to indicate that the email was sent successfully.
             MessageBox.Show("SuccessFully");
-
         }
     }
 }

@@ -1,0 +1,210 @@
+﻿USE MASTER
+GO
+ALTER DATABASE QL_KTX_OWN
+SET SINGLE_USER
+WITH ROLLBACK IMMEDIATE
+GO
+DROP DATABASE QL_KTX_OWN
+GO
+CREATE DATABASE QL_KTX_OWN;
+GO
+USE QL_KTX_OWN;
+GO
+CREATE TABLE DAYPHONG(
+	MA INT IDENTITY(1,1),
+	TEN NVARCHAR(50)
+	PRIMARY KEY(MA)
+);
+GO
+CREATE TABLE PHONG(
+	MA INT,
+	MA_DAY INT,
+	TANG TINYINT,
+	TENPHONG VARCHAR(5) NOT NULL,
+	PRIMARY KEY(MA, MA_DAY, TANG),
+	FOREIGN KEY (MA_DAY) REFERENCES DAYPHONG(MA)
+);
+GO
+CREATE TABLE SINHVIEN(
+	MASV INT IDENTITY(1,1),
+	HOTEN NVARCHAR(50) NOT NULL,
+	EMAIL VARCHAR(50) NOT NULL,
+	DIACHI NVARCHAR(50) NOT NULL,
+	GIOITINH BIT NOT NULL DEFAULT(0),
+	NGAYSINH DATE NOT NULL,
+	LOP VARCHAR(10),
+	PRIMARY KEY(MASV),
+);
+GO
+CREATE TABLE HOPDONG(
+	MA INT IDENTITY(1,1),
+	MASV INT,
+	MA_PHONG INT,
+	MA_DAY INT,
+	TANG TINYINT,
+	TUNGAY DATE,
+	DENNGAY DATE,
+	TRANGTHAI TINYINT,
+	PRIMARY KEY(MA),
+	FOREIGN KEY(MA_PHONG, MA_DAY, TANG) REFERENCES PHONG(MA, MA_DAY, TANG),
+	FOREIGN KEY (MASV) REFERENCES SINHVIEN(MASV)
+);
+GO
+CREATE TABLE NHACUNGCAP(
+	MA INT IDENTITY(1,1),
+	TEN NVARCHAR(50),
+	SDT VARCHAR(10),
+	HOTEN NVARCHAR(50),
+	DIACHI NVARCHAR(50),
+	PRIMARY KEY(MA),
+);
+GO
+CREATE TABLE DICHVU(
+	MA INT IDENTITY(1,1),
+	MA_NHACUNGCAP INT,
+	MA_PHONG INT,
+	MA_DAY INT,
+	TANG TINYINT,
+	LOAI BIT DEFAULT(0),
+	TRANGTHAI TINYINT DEFAULT(0),
+	PRIMARY KEY(MA),
+	FOREIGN KEY(MA_PHONG, MA_DAY, TANG) REFERENCES PHONG(MA, MA_DAY, TANG),
+	FOREIGN KEY(MA_NHACUNGCAP) REFERENCES NHACUNGCAP(MA)
+);
+GO
+CREATE TABLE DIEN_NUOC(
+	MA INT IDENTITY(1,1),
+	MA_DICHVU INT,
+	CHISO INT,
+	NGAY DATE,
+	PRIMARY KEY (MA),
+	FOREIGN KEY(MA_DICHVU) REFERENCES DICHVU(MA),
+);
+GO
+CREATE TABLE HOADON(
+	MA INT IDENTITY(1,1),
+	MA_HOPDONG INT,
+	MA_DICHVU INT,
+	TONGTIEN DECIMAL,
+	NGAYCAP DATE,
+	PRIMARY KEY(MA),
+	FOREIGN KEY(MA_HOPDONG) REFERENCES HOPDONG(MA),
+	FOREIGN KEY(MA_DICHVU) REFERENCES DICHVU(MA)
+);
+GO
+CREATE TABLE BIENLAI(
+	MA_HOADON INT,
+	NGAYCAP DATE,
+	PRIMARY KEY(MA_HOADON),
+	FOREIGN KEY(MA_HOADON) REFERENCES HOADON(MA)
+);
+GO
+INSERT INTO NHACUNGCAP (TEN, SDT, HOTEN, DIACHI)
+VALUES ('Company A', '0123456789', 'John Doe', '123 Main St'),
+       ('Company B', '0987654321', 'Jane Doe', '456 Elm St'),
+       ('Company C', '5555555555', 'Bob Smith', '789 Oak St'),
+       ('Company D', '1111111111', 'Alice Johnson', '321 Pine St'),
+       ('Company E', '2222222222', 'Charlie Brown', '654 Maple St');
+GO
+-- Insert data into DAYPHONG table
+DECLARE @i INT = 1;
+WHILE @i <= 4
+BEGIN
+    INSERT INTO DAYPHONG(TEN) VALUES (N'Dãy ' + CAST(@i AS NVARCHAR));
+    SET @i = @i + 1;
+END
+
+-- Insert data into PHONG table
+DECLARE @j INT;
+DECLARE @x INT;
+DECLARE @y INT;
+DECLARE @z INT;
+SET @y = 1;
+WHILE @y <= 4 -- Day
+BEGIN
+    SET @j = 1;
+    WHILE @j <= 4 -- Tang
+    BEGIN
+		SET @x = 1;
+		WHILE @x <= 50
+		BEGIN
+			INSERT INTO PHONG(MA, MA_DAY, TANG, TENPHONG) VALUES (@x, @y, @j, CONCAT(@y, @j, FORMAT(@x, '00')));
+			SET @z = 1;
+			WHILE @z < 2
+			BEGIN
+				INSERT INTO DICHVU 
+								([MA_NHACUNGCAP]
+							   ,[MA_PHONG]
+							   ,[MA_DAY]
+							   ,[TANG]
+							   ,[LOAI]
+							   ,[TRANGTHAI])
+						 VALUES
+							   (
+							   1
+							   ,@x
+							   ,@y
+							   ,@j
+							   ,@z
+							   ,0
+							   );
+				INSERT INTO DICHVU 
+								([MA_NHACUNGCAP]
+							   ,[MA_PHONG]
+							   ,[MA_DAY]
+							   ,[TANG]
+							   ,[LOAI]
+							   ,[TRANGTHAI])
+						 VALUES
+							   (
+							   1
+							   ,@x
+							   ,@y
+							   ,@j
+							   ,@z
+							   ,1
+							   );
+				SET @z = @z + 1
+			END
+			--PRINT 'Phong: '+CONVERT(VARCHAR, @y) +'.' + CONVERT(VARCHAR, @j) + CONVERT(VARCHAR, FORMAT(@x, '00'))
+			SET @x = @x + 1
+		END
+		SET @j = @j + 1;
+    END
+    SET @y = @y + 1;
+END
+GO
+-- Insert data into SINHVIEN table
+INSERT INTO SINHVIEN(HOTEN, DIACHI, GIOITINH, NGAYSINH, LOP)
+VALUES 
+	(N'Nguyễn Văn A', N'Địa chỉ 1', 0, '2000-01-01', 'D18CQCN01'),
+	(N'Trần Thị B', N'Địa chỉ 2', 1, '2000-02-02', 'D18CQCN02'),
+	(N'Nguyễn Văn A', N'Địa chỉ 1', 0, '2000-01-01', 'D18CQCN01'),
+	(N'Trần Thị B', N'Địa chỉ 2', 1, '2000-02-02', 'D18CQCN02'),
+	(N'Lê Văn C', N'Địa chỉ 3', 0, '2000-03-03', 'D18CQCN03'),
+	(N'Phạm Thị D', N'Địa chỉ 4', 1, '2000-04-04', 'D18CQCN04'),
+	(N'Hoàng Văn E', N'Địa chỉ 5', 0, '2000-05-05', 'D18CQCN05'),
+	(N'Ngô Thị F', N'Địa chỉ 6', 1, '2000-06-06', 'D18CQCN06'),
+	(N'Trần Văn G', N'Địa chỉ 7', 0, '2000-07-07', 'D18CQCN07'),
+	(N'Lý Thị H', N'Địa chỉ 8', 1, '2000-08-08', 'D18CQCN08'),
+	(N'Nguyễn Thị I', N'Địa chỉ 9', 1, '2000-09-09', 'D18CQCN09'),
+	(N'Vũ Văn J', N'Địa chỉ 10', 0, '2000-10-30', 'D18CQCN10');
+
+-- Add more rows as needed
+
+GO
+-- Insert data into HOPDONG table
+INSERT INTO HOPDONG(MASV, MA_PHONG, MA_DAY, TANG, TUNGAY, DENNGAY, TRANGTHAI) VALUES
+(1, 1, 1, 1, '2022-01-01', '2022-06-30', 1),
+(2, 2, 1, 1, '2022-02-01', '2022-07-31', 1),
+(1, 1, 1, 1, '2022-01-01', '2022-06-30', 1),
+(2, 2, 1, 1, '2022-02-01', '2022-07-31', 1),
+(3, 3, 1, 1, '2022-03-01', '2022-08-31', 1),
+(4, 4, 1, 1,'2022-04-01', '2022-09-30', 1),
+(5, 5, 1, 1,'2022-05-01', '2022-10-31', 1),
+(6, 6, 1, 1,'2022-06-01', '2022-11-30', 1),
+(7, 7, 1, 1,'2022-07-01', '2022-12-31', 1),
+(8, 8, 1, 1,'2022-08-01', '2023-01-31', 1),
+(9, 9, 1, 1,'2022-09-01', '2023-02-28', 1),
+(10, 10, 1, 1,'2022-10-01', '2023-03-31', 1);
+-- Add more rows as needed

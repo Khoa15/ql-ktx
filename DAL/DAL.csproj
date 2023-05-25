@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Database.cs" />
     <Compile Include="DayPhong_DAL.cs" />
+    <Compile Include="HoaDon_DAL.cs" />
     <Compile Include="HopDong_DAL.cs" />
+    <Compile Include="NhaCungCap_DAL.cs" />
     <Compile Include="Phong_DAL.cs" />
     <Compile Include="SinhVien_DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
