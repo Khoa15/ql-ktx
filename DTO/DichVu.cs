@@ -8,6 +8,7 @@ namespace DTO
 {
     public abstract class DichVu : Phong
     {
+        private int ma;
         private int chiSoCu;
         private int chiSoMoi;
         private double giaTien;
