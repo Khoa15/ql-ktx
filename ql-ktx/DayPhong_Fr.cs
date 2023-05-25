@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using BLL;
+using DTO;
 namespace ql_ktx
 {
     public partial class DayPhong_Fr : Form
@@ -19,7 +20,8 @@ namespace ql_ktx
 
         private void DayPhong_Fr_Load(object sender, EventArgs e)
         {
-
+            DayPhong_BLL dayPhong_bll = new DayPhong_BLL();
+            dataGridView_DayPhong.DataSource = dayPhong_bll.Load();
         }
     }
 }

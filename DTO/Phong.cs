@@ -11,29 +11,34 @@ namespace DTO
         string tenPhong;
         int maPhong;
         int tang;
+        int soGiuong = 8;
+        int soSv;
         static int giaPhong = 300000;
         public Phong()
         {
 
         }
-        public Phong(int maPhong, int tang, string tenPhong)
+        public Phong(int maPhong, int tang, string tenPhong, int SoGiuong = 0, int soSv = 0)
         {
             this.maPhong = maPhong;
             this.tang = tang;
             this.TenPhong = tenPhong;
+            this.soGiuong = SoGiuong;
+            this.SoSv = soSv;
         }
         public Phong(string tenPhong)
         {
-            string[] tenPhong_ = tenPhong.Split('.');
-            this.tang = int.Parse(tenPhong_[1].ElementAt(0).ToString());
-            this.maPhong = int.Parse(tenPhong_[1].Remove(0, 1).ToString());
-            this.MaDay = int.Parse(tenPhong_[0]);
+            this.MaDay = int.Parse(tenPhong[0].ToString());
+            this.tang = int.Parse(tenPhong[1].ToString());
+            this.MaPhong = int.Parse(tenPhong.Substring(2));
+            tenPhong = tenPhong;
         }
 
         public int MaPhong { get => maPhong; set => maPhong = value; }
         public int Tang { get => tang; set => tang = value; }
         public static int GiaPhong { get => giaPhong; set => giaPhong = value; }
         public string TenPhong { get => tenPhong; set => tenPhong = value; }
-
+        public int SoGiuong { get => soGiuong; set => soGiuong = value; }
+        public int SoSv { get => soSv; set => soSv = value; }
     }
 }

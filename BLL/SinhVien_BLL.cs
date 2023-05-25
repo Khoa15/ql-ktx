@@ -15,6 +15,11 @@ namespace BLL
         {
             return SinhVien.Load();
         }
-        
+        public List<SinhVien> Load(Phong phong)
+        {
+            List<SinhVien> dsSinhVien = SinhVien.Load(phong);
+            
+            return SinhVien.Load(phong);
+        }
     }
 }

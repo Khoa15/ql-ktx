@@ -27,6 +27,15 @@ namespace DTO
             this.ngaySinh = ngaySinh;
             this.gioiTinh = gioiTinh;
         }
+        public SinhVien(HopDong hd)
+        {
+            this.maSV = hd.maSV;
+            this.lop = hd.lop;
+            this.hoTen = hd.hoTen;
+            this.diaChi = hd.diaChi;
+            this.ngaySinh = hd.ngaySinh;
+            this.gioiTinh= hd.gioiTinh;
+        }
 
         public int MaSV { get => maSV; set => maSV = value; }
         public string Lop { get => lop; set => lop = value; }

@@ -31,13 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridViewPhong = new System.Windows.Forms.DataGridView();
+            this.phongBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.phongBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.maPhongDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tangDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.maDayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenDayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phongBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.phongBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.SoGiuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoSv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Xem = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPhong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.phongBindingSource)).BeginInit();
@@ -67,13 +70,25 @@
             this.tangDataGridViewTextBoxColumn,
             this.maDayDataGridViewTextBoxColumn,
             this.tenDayDataGridViewTextBoxColumn,
-            this.TenPhong});
+            this.TenPhong,
+            this.SoGiuong,
+            this.SoSv,
+            this.btn_Xem});
             this.dataGridViewPhong.DataSource = this.phongBindingSource;
             this.dataGridViewPhong.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewPhong.Name = "dataGridViewPhong";
             this.dataGridViewPhong.ReadOnly = true;
             this.dataGridViewPhong.Size = new System.Drawing.Size(463, 215);
             this.dataGridViewPhong.TabIndex = 0;
+            this.dataGridViewPhong.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPhong_CellContentClick);
+            // 
+            // phongBindingSource
+            // 
+            this.phongBindingSource.DataSource = typeof(DTO.Phong);
+            // 
+            // phongBindingSource1
+            // 
+            this.phongBindingSource1.DataSource = typeof(DTO.Phong);
             // 
             // maPhongDataGridViewTextBoxColumn
             // 
@@ -109,19 +124,36 @@
             // 
             // TenPhong
             // 
-            this.TenPhong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TenPhong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.TenPhong.DataPropertyName = "TenPhong";
             this.TenPhong.HeaderText = "Tên Phòng";
             this.TenPhong.Name = "TenPhong";
             this.TenPhong.ReadOnly = true;
+            this.TenPhong.Width = 60;
             // 
-            // phongBindingSource
+            // SoGiuong
             // 
-            this.phongBindingSource.DataSource = typeof(DTO.Phong);
+            this.SoGiuong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SoGiuong.DataPropertyName = "SoGiuong";
+            this.SoGiuong.HeaderText = "Số Giường";
+            this.SoGiuong.Name = "SoGiuong";
+            this.SoGiuong.ReadOnly = true;
             // 
-            // phongBindingSource1
+            // SoSv
             // 
-            this.phongBindingSource1.DataSource = typeof(DTO.Phong);
+            this.SoSv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SoSv.DataPropertyName = "SoSv";
+            this.SoSv.HeaderText = "Số Sinh Viên";
+            this.SoSv.Name = "SoSv";
+            this.SoSv.ReadOnly = true;
+            // 
+            // btn_Xem
+            // 
+            this.btn_Xem.HeaderText = "Xem";
+            this.btn_Xem.Name = "btn_Xem";
+            this.btn_Xem.ReadOnly = true;
+            this.btn_Xem.Text = "Xem";
+            this.btn_Xem.Width = 50;
             // 
             // Phong_Fr
             // 
@@ -152,5 +184,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn maDayDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenDayDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenPhong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SoGiuong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SoSv;
+        private System.Windows.Forms.DataGridViewButtonColumn btn_Xem;
     }
 }

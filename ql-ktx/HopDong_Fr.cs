@@ -13,6 +13,7 @@ namespace ql_ktx
 {
     public partial class HopDong_Fr : Form
     {
+        List<HopDong> dsHopDong;
         public HopDong_Fr()
         {
             InitializeComponent();
@@ -27,7 +28,26 @@ namespace ql_ktx
         private void HopDong_Fr_Load(object sender, EventArgs e)
         {
             HopDong_BLL hopdong_bll = new HopDong_BLL();
-            dataGridView_HopDong.DataSource = hopdong_bll.Load();
+            dsHopDong = hopdong_bll.Load();
+            loadDataGridView_HopDong(dsHopDong);
+        }
+
+        private void button_CapNhatHopDong_Click(object sender, EventArgs e)
+        {
+            dsHopDong.ForEach(hopDong =>
+            {
+                if(hopDong.NgayHetHan < DateTime.Now)
+                {
+                    hopDong.TrangThai = 3;
+                }
+            });
+            loadDataGridView_HopDong(dsHopDong);
+        }
+
+        private void loadDataGridView_HopDong(List<HopDong> DSHopDong)
+        {
+            dataGridView_HopDong.Refresh();
+            dataGridView_HopDong.DataSource = dsHopDong;
         }
     }
 }

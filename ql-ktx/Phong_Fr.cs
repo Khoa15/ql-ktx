@@ -22,6 +22,18 @@ namespace ql_ktx
         {
             Phong_BLL phong = new Phong_BLL();
             dataGridViewPhong.DataSource = phong.Load();
+            phong = null;
         }
+
+        private void dataGridViewPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var x = dataGridViewPhong.Columns[e.ColumnIndex].HeaderText;
+            if(x == "Xem")
+            {
+                XemPhong_Fr xemPhong = new XemPhong_Fr(dataGridViewPhong.CurrentRow);
+                xemPhong.Show();
+            }
+        }
+
     }
 }

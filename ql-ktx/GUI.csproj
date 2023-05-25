@@ -78,6 +78,12 @@
     <Compile Include="ThemHopDong_Fr.Designer.cs">
       <DependentUpon>ThemHopDong_Fr.cs</DependentUpon>
     </Compile>
+    <Compile Include="XemPhong_Fr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XemPhong_Fr.Designer.cs">
+      <DependentUpon>XemPhong_Fr.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DayPhong_Fr.resx">
       <DependentUpon>DayPhong_Fr.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +107,9 @@
     </Compile>
     <EmbeddedResource Include="ThemHopDong_Fr.resx">
       <DependentUpon>ThemHopDong_Fr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XemPhong_Fr.resx">
+      <DependentUpon>XemPhong_Fr.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\DTO.DayPhong.datasource" />
     <None Include="Properties\DataSources\DTO.HopDong.datasource" />

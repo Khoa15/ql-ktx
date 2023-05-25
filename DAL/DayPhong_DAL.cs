@@ -13,8 +13,8 @@ namespace DAL
         public DayPhong_DAL() { }
         public List<DayPhong> Load()
         {
+            dsDay.Clear();
             Database db = new Database();
-            db.Conn.Open();
             SqlDataReader rd = db.Select("SELECT * FROM DAYPHONG");
             while (rd.Read())
             {

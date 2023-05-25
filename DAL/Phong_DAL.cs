@@ -1,6 +1,7 @@
 ﻿using DTO;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace DAL
 {
@@ -10,11 +11,14 @@ namespace DAL
         public Phong_DAL()
         {
         }
+
+        public List<Phong> DsPhong { get => dsPhong; set => dsPhong = value; }
+
         public List<Phong> Load()
         {
-            dsPhong.Clear();
+            DsPhong.Clear();
             Database db = new Database();
-            SqlDataReader rd = db.Select("SELECT PHONG.MA, MA_DAY, TANG, DAYPHONG.TEN, CONCAT(CAST(PHONG.MA_DAY AS VARCHAR(1)), '.', CAST(TANG AS VARCHAR(1)), CAST(FORMAT(PHONG.MA, '00') AS VARCHAR(2))) AS TENPHONG FROM PHONG INNER JOIN DAYPHONG ON PHONG.MA_DAY = DAYPHONG.MA ORDER BY TENPHONG");
+            SqlDataReader rd = db.Select("SELECT PHONG.MA, MA_DAY, TANG, DAYPHONG.TEN, TENPHONG FROM PHONG INNER JOIN DAYPHONG ON PHONG.MA_DAY = DAYPHONG.MA ORDER BY TENPHONG");
             while(rd.Read())
             {
                 Phong p = new Phong();
@@ -23,16 +27,21 @@ namespace DAL
                 p.Tang = int.Parse(rd["Tang"].ToString());
                 p.TenDay = rd["TEN"].ToString();
                 p.TenPhong = rd["TENPHONG"].ToString();
-                dsPhong.Add(p);
+                DsPhong.Add(p);
             }
             db.Conn.Close();
-            return dsPhong;
+            rd = db.Select("SELECT PHONG.TENPHONG, COUNT(HOPDONG.MASV) AS SOLUONG FROM PHONG LEFT JOIN HOPDONG ON HOPDONG.MA_PHONG = PHONG.MA AND HOPDONG.MA_DAY = PHONG.MA_DAY AND HOPDONG.TANG = PHONG.TANG GROUP BY (TENPHONG) ORDER BY TENPHONG ASC");
+            while (rd.Read())
+            {
+                DsPhong.Where(phong => phong.TenPhong == rd["TENPHONG"].ToString()).ToList().ForEach(phong => phong.SoSv = int.Parse(rd["SOLUONG"].ToString()));
+            }
+            db.Conn.Close();
+            return DsPhong;
         }
         public Phong Load(int id)
         {
             Phong p = new Phong();
             Database db = new Database();
-            db.Conn.Open();
             SqlDataReader rd = db.Select($"SELECT TOP (1) * FROM Phong WHERE MA = ${id}");
             while (rd.Read())
             {
@@ -43,6 +52,5 @@ namespace DAL
             db.Conn.Close();
             return p;
         }
-        
     }
 }

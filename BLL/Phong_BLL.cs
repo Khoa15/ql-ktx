@@ -18,5 +18,10 @@ namespace BLL
         {
             return phong_dal.Load();
         }
+        public int Count(int MaPhong, int MaDay, int Tang)
+        {
+            HopDong_DAL hopDong_dal = new HopDong_DAL();
+            return hopDong_dal.Count(MaPhong, MaDay, Tang);
+        }
     }
 }

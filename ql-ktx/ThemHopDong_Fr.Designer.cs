@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.panel_dsPhong = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBox_TrangThai = new System.Windows.Forms.ComboBox();
             this.txtBox_TienPhong = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.dateTimePicker_NgayHetHan = new System.Windows.Forms.DateTimePicker();
@@ -55,8 +57,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_MaSV = new System.Windows.Forms.TextBox();
-            this.comboBox_TrangThai = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.hopDongBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -65,6 +65,8 @@
             // 
             // panel_dsPhong
             // 
+            this.panel_dsPhong.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_dsPhong.Location = new System.Drawing.Point(353, 12);
             this.panel_dsPhong.Name = "panel_dsPhong";
             this.panel_dsPhong.Size = new System.Drawing.Size(339, 359);
@@ -72,6 +74,9 @@
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.comboBox_TrangThai);
             this.panel2.Controls.Add(this.txtBox_TienPhong);
@@ -100,6 +105,28 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(335, 359);
             this.panel2.TabIndex = 15;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(177, 310);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(55, 13);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "Trạng thái";
+            // 
+            // comboBox_TrangThai
+            // 
+            this.comboBox_TrangThai.FormattingEnabled = true;
+            this.comboBox_TrangThai.Items.AddRange(new object[] {
+            "Đã hủy",
+            "Chờ cọc",
+            "Đang ở",
+            "Hết hạn"});
+            this.comboBox_TrangThai.Location = new System.Drawing.Point(235, 307);
+            this.comboBox_TrangThai.Name = "comboBox_TrangThai";
+            this.comboBox_TrangThai.Size = new System.Drawing.Size(91, 21);
+            this.comboBox_TrangThai.TabIndex = 14;
             // 
             // txtBox_TienPhong
             // 
@@ -320,27 +347,6 @@
             this.textBox_MaSV.TabIndex = 1;
             this.textBox_MaSV.WordWrap = false;
             this.textBox_MaSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_MaSV_KeyPress);
-            // 
-            // comboBox_TrangThai
-            // 
-            this.comboBox_TrangThai.FormattingEnabled = true;
-            this.comboBox_TrangThai.Items.AddRange(new object[] {
-            "Chờ cọc",
-            "Đang ở",
-            "Hết hạn"});
-            this.comboBox_TrangThai.Location = new System.Drawing.Point(235, 307);
-            this.comboBox_TrangThai.Name = "comboBox_TrangThai";
-            this.comboBox_TrangThai.Size = new System.Drawing.Size(91, 21);
-            this.comboBox_TrangThai.TabIndex = 14;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(177, 310);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(55, 13);
-            this.label11.TabIndex = 37;
-            this.label11.Text = "Trạng thái";
             // 
             // hopDongBindingSource
             // 
