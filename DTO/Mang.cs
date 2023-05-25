@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class Dien: DichVu
+    public class Mang
     {
-        public static int giaTien = 7000;
-        public Dien()
-        {
-        }
+        static int gia = 300000;
+        public Mang() { }
 
+        public static int Gia { get => gia; set => gia = value; }
     }
 }

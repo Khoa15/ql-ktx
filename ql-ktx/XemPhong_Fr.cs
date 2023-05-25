@@ -17,6 +17,7 @@ namespace ql_ktx
     {
         Phong phong;
         List<HopDong> dsHopDong;
+        List<HoaDon> dsHoaDon;
         public XemPhong_Fr(DataGridViewRow currentRow)
         {
             InitializeComponent();
@@ -28,7 +29,34 @@ namespace ql_ktx
             HopDong_BLL hopDong_bll = new HopDong_BLL();
             dsHopDong = hopDong_bll.Load(phong);
             dataGridView_SinhVien.DataSource = dsHopDong;
-
+            HoaDon_BLL hoaDon_BLL= new HoaDon_BLL();
+            dsHoaDon = hoaDon_BLL.Load(phong);
+            dsHoaDon.ForEach(hd =>
+            {
+                if (hd.Loai == true)
+                {
+                    textBox_NuocChiSoCu.Text = hd.ChiSoCu.ToString();
+                    textBox_NuocChiSoMoi.Text = hd.ChiSoCu.ToString();
+                    textBox_DienThanhTien.Text = thanhTien(hd.ChiSoCu, hd.ChiSoCu, hd.Loai).ToString();
+                }
+                else
+                {
+                    textBox_DienChiSoCu.Text = hd.ChiSoCu.ToString();
+                    textBox_DienChiSoMoi.Text = hd.ChiSoCu.ToString();
+                    textBox_NuocThanhTien.Text = thanhTien(hd.ChiSoCu, hd.ChiSoCu, hd.Loai).ToString();
+                }
+                textBox_MangChiPhi.Text = Mang.Gia.ToString();
+                textBox_SoSV.Text = dsHopDong.Count.ToString();
+                textBox_ChiPhiPhong.Text = Phong.GiaPhong.ToString();
+            });
+        }
+        private int thanhTien(int cu, int moi, bool loai)
+        {
+            if(loai == true)
+            {
+                return (moi - cu) * Dien.giaTien;
+            }
+            return (moi - cu) * Nuoc.giaTien;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,6 +93,22 @@ namespace ql_ktx
 
             // Display a message to indicate that the email was sent successfully.
             MessageBox.Show("SuccessFully");
+        }
+
+        private void button_Tinh_Click(object sender, EventArgs e)
+        {
+            textBox_TongTien.Text = String.Format("{0:#,##0}",int.Parse(textBox_DienThanhTien.Text) + int.Parse(textBox_DienThanhTien.Text) + Mang.Gia + dsHopDong.Count * Phong.GiaPhong);
+        }
+
+        private void button_SaveXemPhong_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void textBox_DienChiSoMoi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
         }
     }
 }

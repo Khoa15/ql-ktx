@@ -1,6 +1,6 @@
 ﻿namespace ql_ktx
 {
-    partial class ThemHopDong_Fr
+    partial class ThemSuaHopDong_Fr
     {
         /// <summary>
         /// Required designer variable.
@@ -352,15 +352,15 @@
             // 
             this.hopDongBindingSource.DataSource = typeof(DTO.HopDong);
             // 
-            // ThemHopDong_Fr
+            // ThemSuaHopDong_Fr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 383);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel_dsPhong);
-            this.Name = "ThemHopDong_Fr";
-            this.Text = "Thêm Hợp Đồng";
+            this.Name = "ThemSuaHopDong_Fr";
+            this.Text = "Hợp Đồng";
             this.Load += new System.EventHandler(this.ThemHopDong_Fr_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

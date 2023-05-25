@@ -40,5 +40,9 @@ namespace DTO
         public string TenPhong { get => tenPhong; set => tenPhong = value; }
         public int SoGiuong { get => soGiuong; set => soGiuong = value; }
         public int SoSv { get => soSv; set => soSv = value; }
+        public int TinhTien()
+        {
+            return giaPhong * soSv;
+        }
     }
 }

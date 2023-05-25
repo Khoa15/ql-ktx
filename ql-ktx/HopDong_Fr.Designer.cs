@@ -30,25 +30,25 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView_HopDong = new System.Windows.Forms.DataGridView();
-            this.TenPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hopDongBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_TimHopDong = new System.Windows.Forms.Button();
             this.textBox_TimHopDong = new System.Windows.Forms.TextBox();
             this.btn_ThemHopDong = new System.Windows.Forms.Button();
+            this.MaHD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.maSVDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hoTenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ngaySinhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gioiTinhDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.maPhongDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ngayBatDauDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ngayHetHanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trangThaiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hopDongBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button_CapNhatHopDong = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HopDong)).BeginInit();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hopDongBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView_HopDong
@@ -58,6 +58,7 @@
             this.dataGridView_HopDong.AutoGenerateColumns = false;
             this.dataGridView_HopDong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_HopDong.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MaHD,
             this.maSVDataGridViewTextBoxColumn,
             this.hoTenDataGridViewTextBoxColumn,
             this.lopDataGridViewTextBoxColumn,
@@ -74,17 +75,14 @@
             this.dataGridView_HopDong.ReadOnly = true;
             this.dataGridView_HopDong.Size = new System.Drawing.Size(646, 391);
             this.dataGridView_HopDong.TabIndex = 1;
+            this.dataGridView_HopDong.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_HopDong_CellMouseDoubleClick);
             // 
-            // TenPhong
+            // hopDongBindingSource
             // 
-            this.TenPhong.DataPropertyName = "TenPhong";
-            this.TenPhong.HeaderText = "Tên Phòng";
-            this.TenPhong.Name = "TenPhong";
-            this.TenPhong.ReadOnly = true;
+            this.hopDongBindingSource.DataSource = typeof(DTO.HopDong);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button_CapNhatHopDong);
             this.panel1.Controls.Add(this.btn_TimHopDong);
             this.panel1.Controls.Add(this.textBox_TimHopDong);
             this.panel1.Controls.Add(this.btn_ThemHopDong);
@@ -103,12 +101,13 @@
             this.btn_TimHopDong.TabIndex = 4;
             this.btn_TimHopDong.Text = "Tìm kiếm";
             this.btn_TimHopDong.UseVisualStyleBackColor = true;
+            this.btn_TimHopDong.Click += new System.EventHandler(this.btn_TimHopDong_Click);
             // 
             // textBox_TimHopDong
             // 
-            this.textBox_TimHopDong.Location = new System.Drawing.Point(166, 4);
+            this.textBox_TimHopDong.Location = new System.Drawing.Point(84, 4);
             this.textBox_TimHopDong.Name = "textBox_TimHopDong";
-            this.textBox_TimHopDong.Size = new System.Drawing.Size(402, 20);
+            this.textBox_TimHopDong.Size = new System.Drawing.Size(484, 20);
             this.textBox_TimHopDong.TabIndex = 3;
             // 
             // btn_ThemHopDong
@@ -120,6 +119,14 @@
             this.btn_ThemHopDong.Text = "Thêm";
             this.btn_ThemHopDong.UseVisualStyleBackColor = true;
             this.btn_ThemHopDong.Click += new System.EventHandler(this.btnAddHopDong_Click);
+            // 
+            // MaHD
+            // 
+            this.MaHD.DataPropertyName = "MaHD";
+            this.MaHD.HeaderText = "Mã HĐ";
+            this.MaHD.Name = "MaHD";
+            this.MaHD.ReadOnly = true;
+            this.MaHD.Width = 40;
             // 
             // maSVDataGridViewTextBoxColumn
             // 
@@ -164,6 +171,13 @@
             this.maPhongDataGridViewTextBoxColumn.Name = "maPhongDataGridViewTextBoxColumn";
             this.maPhongDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // TenPhong
+            // 
+            this.TenPhong.DataPropertyName = "TenPhong";
+            this.TenPhong.HeaderText = "Tên Phòng";
+            this.TenPhong.Name = "TenPhong";
+            this.TenPhong.ReadOnly = true;
+            // 
             // ngayBatDauDataGridViewTextBoxColumn
             // 
             this.ngayBatDauDataGridViewTextBoxColumn.DataPropertyName = "NgayBatDau";
@@ -185,20 +199,6 @@
             this.trangThaiDataGridViewTextBoxColumn.Name = "trangThaiDataGridViewTextBoxColumn";
             this.trangThaiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // hopDongBindingSource
-            // 
-            this.hopDongBindingSource.DataSource = typeof(DTO.HopDong);
-            // 
-            // button_CapNhatHopDong
-            // 
-            this.button_CapNhatHopDong.Location = new System.Drawing.Point(84, 3);
-            this.button_CapNhatHopDong.Name = "button_CapNhatHopDong";
-            this.button_CapNhatHopDong.Size = new System.Drawing.Size(75, 23);
-            this.button_CapNhatHopDong.TabIndex = 5;
-            this.button_CapNhatHopDong.Text = "Cập Nhật";
-            this.button_CapNhatHopDong.UseVisualStyleBackColor = true;
-            this.button_CapNhatHopDong.Click += new System.EventHandler(this.button_CapNhatHopDong_Click);
-            // 
             // HopDong_Fr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,9 +210,9 @@
             this.Text = "HopDong_Fr";
             this.Load += new System.EventHandler(this.HopDong_Fr_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_HopDong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hopDongBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hopDongBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,6 +224,7 @@
         private System.Windows.Forms.Button btn_ThemHopDong;
         private System.Windows.Forms.Button btn_TimHopDong;
         private System.Windows.Forms.TextBox textBox_TimHopDong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaHD;
         private System.Windows.Forms.DataGridViewTextBoxColumn maSVDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hoTenDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lopDataGridViewTextBoxColumn;
@@ -234,6 +235,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ngayBatDauDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ngayHetHanDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn trangThaiDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button button_CapNhatHopDong;
     }
 }

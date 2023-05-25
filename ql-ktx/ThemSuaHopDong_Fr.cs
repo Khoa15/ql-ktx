@@ -12,12 +12,18 @@ using BLL;
 using DTO;
 namespace ql_ktx
 {
-    public partial class ThemHopDong_Fr : Form
+    public partial class ThemSuaHopDong_Fr : Form
     {
         SinhVien_BLL sinhVien_bll = new SinhVien_BLL();
-        public ThemHopDong_Fr()
+        HopDong hopDong;
+        public ThemSuaHopDong_Fr()
         {
             InitializeComponent();
+        }
+        public ThemSuaHopDong_Fr(HopDong hd)
+        {
+            InitializeComponent();
+            hopDong = hd;
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -28,6 +34,18 @@ namespace ql_ktx
         private void ThemHopDong_Fr_Load(object sender, EventArgs e)
         {
             loadPhong();
+            if(hopDong != null)
+            {
+                textBox_MaSV.Text = hopDong.MaSV.ToString();
+                textBox_HoVaTen.Text = hopDong.HoTen.ToString();
+                textBox_Lop.Text = hopDong.Lop.ToString();
+                richTextBox_DiaChi.Text = hopDong.DiaChi.ToString();
+                dateTimePicker_NgaySinh.Text = hopDong.NgaySinh.ToString();
+                textBox_TenPhong.Text = hopDong.TenPhong.ToString();
+                dateTimePicker_NgayBatDau.Text = hopDong.NgayBatDau.ToString();
+                dateTimePicker_NgayHetHan.Text = hopDong.NgayHetHan.ToString();
+                comboBox_TrangThai.SelectedIndex = hopDong.TrangThai;
+            }
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -38,17 +56,17 @@ namespace ql_ktx
         private void button_TimSV_Click(object sender, EventArgs e)
         {
             List<SinhVien> dsSinhVien = sinhVien_bll.Load();
-            SinhVien found = dsSinhVien.Find(sv => sv.MaSV == int.Parse(textBox_MaSV.Text));
-            if (found == null)
+            SinhVien sinhVien = dsSinhVien.Find(sv => sv.MaSV == int.Parse(textBox_MaSV.Text));
+            if (sinhVien == null)
             {
                 MessageBox.Show("Không tìm thấy sinh viên!");
             }
             else
             {
-                textBox_HoVaTen.Text = found.HoTen.ToString();
-                textBox_Lop.Text = found.Lop.ToString();
-                richTextBox_DiaChi.Text= found.DiaChi.ToString();
-                dateTimePicker_NgaySinh.Text = found.NgaySinh.ToString();
+                textBox_HoVaTen.Text = sinhVien.HoTen.ToString();
+                textBox_Lop.Text = sinhVien.Lop.ToString();
+                richTextBox_DiaChi.Text = sinhVien.DiaChi.ToString();
+                dateTimePicker_NgaySinh.Text = sinhVien.NgaySinh.ToString();
             }
         }
 
@@ -81,7 +99,7 @@ namespace ql_ktx
             HopDong_BLL hd_bll = new HopDong_BLL();
             if (hd_bll.Save(hd) != 0)
             {
-                MessageBox.Show("Đã thêm hợp đồng!");
+                MessageBox.Show("Đã lưu hợp đồng!");
                 loadPhong();
             }
             else

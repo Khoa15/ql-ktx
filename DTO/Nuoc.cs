@@ -8,13 +8,10 @@ namespace DTO
 {
     public class Nuoc: DichVu
     {
+        public static int giaTien = 3000;
         public Nuoc()
         {
-            GiaTien = 3000;
         }
-        public override double TinhTien()
-        {
-            return GiaTien * (ChiSoMoi - ChiSoCu);
-        }
+
     }
 }

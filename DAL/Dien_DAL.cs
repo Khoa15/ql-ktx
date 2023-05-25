@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace DTO
+using DTO;
+namespace DAL
 {
-    public class Dien: DichVu
+    public class Dien_DAL
     {
-        public static int giaTien = 7000;
-        public Dien()
+        List<Dien> dsDien = new List<Dien>();
+        public Dien_DAL()
         {
-        }
 
+        }
     }
 }

@@ -52,6 +52,12 @@
     <Compile Include="DayPhong_Fr.Designer.cs">
       <DependentUpon>DayPhong_Fr.cs</DependentUpon>
     </Compile>
+    <Compile Include="HoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HoaDon.Designer.cs">
+      <DependentUpon>HoaDon.cs</DependentUpon>
+    </Compile>
     <Compile Include="HopDong_Fr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,11 +78,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThemHopDong_Fr.cs">
+    <Compile Include="ThemSuaHopDong_Fr.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThemHopDong_Fr.Designer.cs">
-      <DependentUpon>ThemHopDong_Fr.cs</DependentUpon>
+    <Compile Include="ThemSuaHopDong_Fr.Designer.cs">
+      <DependentUpon>ThemSuaHopDong_Fr.cs</DependentUpon>
     </Compile>
     <Compile Include="XemPhong_Fr.cs">
       <SubType>Form</SubType>
@@ -86,6 +92,9 @@
     </Compile>
     <EmbeddedResource Include="DayPhong_Fr.resx">
       <DependentUpon>DayPhong_Fr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoaDon.resx">
+      <DependentUpon>HoaDon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HopDong_Fr.resx">
       <DependentUpon>HopDong_Fr.cs</DependentUpon>
@@ -105,13 +114,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ThemHopDong_Fr.resx">
-      <DependentUpon>ThemHopDong_Fr.cs</DependentUpon>
+    <EmbeddedResource Include="ThemSuaHopDong_Fr.resx">
+      <DependentUpon>ThemSuaHopDong_Fr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="XemPhong_Fr.resx">
       <DependentUpon>XemPhong_Fr.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\DTO.DayPhong.datasource" />
+    <None Include="Properties\DataSources\DTO.HoaDon.datasource" />
     <None Include="Properties\DataSources\DTO.HopDong.datasource" />
     <None Include="Properties\DataSources\DTO.Phong.datasource" />
     <None Include="Properties\DataSources\DTO.SinhVien.datasource" />

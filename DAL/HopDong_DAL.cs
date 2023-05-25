@@ -16,7 +16,7 @@ namespace DAL
         public List<HopDong> Load()
         {
             Database db = new Database();
-            SqlDataReader rd = db.Select("SELECT HOPDONG.MA, HOPDONG.MASV, HOTEN, LOP, GIOITINH, NGAYSINH, TRANGTHAI, TUNGAY, DENNGAY, MA_PHONG, MA_DAY, TANG, CONCAT(CAST(MA_DAY AS VARCHAR(1)), CAST(TANG AS VARCHAR(1)), CAST(FORMAT(MA_PHONG, '00') AS VARCHAR(2))) AS TENPHONG  FROM HOPDONG INNER JOIN SINHVIEN ON HOPDONG.MASV = SINHVIEN.MASV ORDER BY DENNGAY ASC");
+            SqlDataReader rd = db.Select("SELECT HOPDONG.MA, HOPDONG.MASV, HOTEN, DIACHI, LOP, GIOITINH, NGAYSINH, TRANGTHAI, TUNGAY, DENNGAY, MA_PHONG, MA_DAY, TANG, CONCAT(CAST(MA_DAY AS VARCHAR(1)), CAST(TANG AS VARCHAR(1)), CAST(FORMAT(MA_PHONG, '00') AS VARCHAR(2))) AS TENPHONG  FROM HOPDONG INNER JOIN SINHVIEN ON HOPDONG.MASV = SINHVIEN.MASV ORDER BY DENNGAY ASC");
             while(rd.Read())
             {
                 HopDong hd = new HopDong();
@@ -31,6 +31,7 @@ namespace DAL
                 hd.HoTen = rd["HoTen"].ToString();
                 hd.MaSV = int.Parse(rd["MASV"].ToString());
                 hd.Lop = rd["LOP"].ToString();
+                hd.DiaChi = rd["DIACHI"].ToString();
                 hd.GioiTinh = bool.Parse(rd["GioiTinh"].ToString());
                 hd.NgaySinh = DateTime.Parse(rd["NGAYSINH"].ToString());
                 hd.TrangThai = int.Parse(rd["TRANGTHAI"].ToString());
@@ -70,10 +71,27 @@ namespace DAL
         {
             Database db = new Database();
             db.Conn.Open();
-            string sql = $"INSERT INTO HOPDONG ([MASV], [MA_PHONG], [MA_DAY], [TANG], [TUNGAY], [DENNGAY], [TRANGTHAI]) VALUES( {hd.MaSV}, {hd.MaPhong}, {hd.MaDay}, {hd.Tang}, '{hd.NgayBatDau}', '{hd.NgayHetHan}', {hd.TrangThai})";
+            string sql = $"SELECT MASV FROM HOPDONG WHERE MASV = {hd.MaSV} AND MA_PHONG = {hd.MaPhong} AND TANG = {hd.Tang} AND TRANGTHAI != 0 AND TRANGTHAI != 3";
             SqlCommand cmd = new SqlCommand(sql, db.Conn);
-            int result = cmd.ExecuteNonQuery();
+            int result =  cmd.ExecuteReader().FieldCount;
             db.Conn.Close();
+            if (result > 0)
+            {
+                db.Conn.Open();
+                sql = $"UPDATE HOPDONG SET TRANGTHAI = {hd.TrangThai}, TUNGAY = '{hd.NgayBatDau.ToShortDateString()}', DENNGAY = '{hd.NgayHetHan.ToShortDateString()}' WHERE MASV = {hd.MaSV} AND MA_PHONG = {hd.MaPhong} AND TANG = {hd.Tang};";
+                sql += $"UPDATE SINHVIEN SET HOTEN = N'{hd.HoTen}', DIACHI = N'{hd.DiaChi}', GIOITINH = {((hd.GioiTinh == true) ? 1 : 0)}, NGAYSINH = '{hd.NgaySinh}', LOP='{hd.Lop}' WHERE MASV = {hd.MaSV}";
+                cmd = new SqlCommand(sql, db.Conn);
+                result = cmd.ExecuteNonQuery() ;
+                db.Conn.Close();
+            }
+            else
+            {
+                db.Conn.Open();
+                sql = $"INSERT INTO HOPDONG ([MASV], [MA_PHONG], [MA_DAY], [TANG], [TUNGAY], [DENNGAY], [TRANGTHAI]) VALUES( {hd.MaSV}, {hd.MaPhong}, {hd.MaDay}, {hd.Tang}, '{hd.NgayBatDau}', '{hd.NgayHetHan}', {hd.TrangThai})";
+                cmd = new SqlCommand(sql, db.Conn);
+                result = cmd.ExecuteNonQuery();
+                db.Conn.Close();
+            }
             return result;
         }
         public int Count(int MaPhong, int MaDay, int Tang)

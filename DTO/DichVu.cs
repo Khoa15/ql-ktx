@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public abstract class DichVu : Phong
+    public class DichVu : Phong
     {
         private int ma;
+        private bool loai;// {0: dien, 1: nuoc}
         private int chiSoCu;
         private int chiSoMoi;
         private double giaTien;
 
-        protected int ChiSoCu { get => chiSoCu; set => chiSoCu = value; }
-        protected int ChiSoMoi
+        public int ChiSoCu { get => chiSoCu; set => chiSoCu = value; }
+        public int ChiSoMoi
         {
             get => chiSoMoi;
             set
@@ -23,8 +24,13 @@ namespace DTO
                 chiSoMoi = value;
             }
         }
-        protected double GiaTien { get => giaTien; set => giaTien = value; }
+        public double GiaTien { get => giaTien; set => giaTien = value; }
+        public bool Loai { get => loai; set => loai = value; }
+
         public DichVu() { }
-        public abstract double TinhTien();
+        public double TinhTien()
+        {
+            return giaTien * (chiSoMoi - chiSoCu);
+        }
     }
 }

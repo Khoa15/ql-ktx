@@ -19,6 +19,7 @@ namespace ql_ktx
 
         private void mainFormKTX_Load(object sender, EventArgs e)
         {
+            comboBox_TimSinhVien.SelectedIndex = 0;
             dsSinhVien = SinhVien.Load();
             dataGridViewSinhVien.DataSource = dsSinhVien;
         }
@@ -70,8 +71,29 @@ namespace ql_ktx
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string i = comboBox_TimSinhVien.Text;
+            int i = comboBox_TimSinhVien.SelectedIndex;
             string obj = textBox_TimSinhVien.Text;
+            //Mã SV
+            //Họ và tên
+            //Lớp
+            if (i == 0)
+            {
+                dsSinhVien = dsSinhVien.Where(sv => sv.MaSV == int.Parse(obj)).ToList();
+            }else if(i == 1)
+            {
+                dsSinhVien = dsSinhVien.Where(sv => sv.HoTen == obj).ToList();
+            }else if(i == 2)
+            {
+                dsSinhVien = dsSinhVien.Where(sv => sv.Lop == obj).ToList();
+            }
+            dataGridViewSinhVien.Refresh();
+            dataGridViewSinhVien.DataSource = dsSinhVien;
+        }
+
+        private void dataGridViewSinhVien_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ThemSuaHopDong_Fr themHopDong_Fr = new ThemSuaHopDong_Fr();
+            themHopDong_Fr.Show();
         }
     }
 }

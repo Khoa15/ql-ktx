@@ -23,7 +23,7 @@ namespace DAL
             SqlDataReader rd = cmd.ExecuteReader();
             while(rd.Read())
             {
-
+                //DichVu dv = new DichVu();
             }
             db.Conn.Close();
             return dsDichVu;

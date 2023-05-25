@@ -36,7 +36,12 @@
             this.btnNaviHopDong = new System.Windows.Forms.Button();
             this.btnNaviSinhVien = new System.Windows.Forms.Button();
             this.panelBody = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox_TimSinhVien = new System.Windows.Forms.TextBox();
+            this.comboBox_TimSinhVien = new System.Windows.Forms.ComboBox();
             this.dataGridViewSinhVien = new System.Windows.Forms.DataGridView();
+            this.button_NaviHoaDon = new System.Windows.Forms.Button();
+            this.button_NaviNhaCungCap = new System.Windows.Forms.Button();
             this.maSVDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hoTenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,9 +49,6 @@
             this.ngaySinhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gioiTinhDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.sinhVienBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.comboBox_TimSinhVien = new System.Windows.Forms.ComboBox();
-            this.textBox_TimSinhVien = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.sinhVienBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panelNavi.SuspendLayout();
             this.panelBody.SuspendLayout();
@@ -57,6 +59,8 @@
             // 
             // panelNavi
             // 
+            this.panelNavi.Controls.Add(this.button_NaviNhaCungCap);
+            this.panelNavi.Controls.Add(this.button_NaviHoaDon);
             this.panelNavi.Controls.Add(this.btnPhong);
             this.panelNavi.Controls.Add(this.btnDayPhong);
             this.panelNavi.Controls.Add(this.btnNaviHopDong);
@@ -117,6 +121,35 @@
             this.panelBody.Size = new System.Drawing.Size(652, 426);
             this.panelBody.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(568, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(81, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Tìm";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox_TimSinhVien
+            // 
+            this.textBox_TimSinhVien.Location = new System.Drawing.Point(133, 4);
+            this.textBox_TimSinhVien.Name = "textBox_TimSinhVien";
+            this.textBox_TimSinhVien.Size = new System.Drawing.Size(429, 20);
+            this.textBox_TimSinhVien.TabIndex = 2;
+            // 
+            // comboBox_TimSinhVien
+            // 
+            this.comboBox_TimSinhVien.FormattingEnabled = true;
+            this.comboBox_TimSinhVien.Items.AddRange(new object[] {
+            "Mã SV",
+            "Họ và tên",
+            "Lớp"});
+            this.comboBox_TimSinhVien.Location = new System.Drawing.Point(4, 4);
+            this.comboBox_TimSinhVien.Name = "comboBox_TimSinhVien";
+            this.comboBox_TimSinhVien.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_TimSinhVien.TabIndex = 1;
+            // 
             // dataGridViewSinhVien
             // 
             this.dataGridViewSinhVien.AllowUserToAddRows = false;
@@ -140,11 +173,30 @@
             this.dataGridViewSinhVien.Size = new System.Drawing.Size(646, 391);
             this.dataGridViewSinhVien.TabIndex = 0;
             // 
+            // button_NaviHoaDon
+            // 
+            this.button_NaviHoaDon.Location = new System.Drawing.Point(3, 163);
+            this.button_NaviHoaDon.Name = "button_NaviHoaDon";
+            this.button_NaviHoaDon.Size = new System.Drawing.Size(111, 34);
+            this.button_NaviHoaDon.TabIndex = 4;
+            this.button_NaviHoaDon.Text = "Hóa Đơn";
+            this.button_NaviHoaDon.UseVisualStyleBackColor = true;
+            // 
+            // button_NaviNhaCungCap
+            // 
+            this.button_NaviNhaCungCap.Location = new System.Drawing.Point(3, 203);
+            this.button_NaviNhaCungCap.Name = "button_NaviNhaCungCap";
+            this.button_NaviNhaCungCap.Size = new System.Drawing.Size(111, 34);
+            this.button_NaviNhaCungCap.TabIndex = 5;
+            this.button_NaviNhaCungCap.Text = "Nhà Cung Cấp";
+            this.button_NaviNhaCungCap.UseVisualStyleBackColor = true;
+            // 
             // maSVDataGridViewTextBoxColumn
             // 
             this.maSVDataGridViewTextBoxColumn.DataPropertyName = "MaSV";
             this.maSVDataGridViewTextBoxColumn.HeaderText = "Mã Sinh Viên";
             this.maSVDataGridViewTextBoxColumn.Name = "maSVDataGridViewTextBoxColumn";
+            this.maSVDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // hoTenDataGridViewTextBoxColumn
             // 
@@ -152,18 +204,21 @@
             this.hoTenDataGridViewTextBoxColumn.DataPropertyName = "HoTen";
             this.hoTenDataGridViewTextBoxColumn.HeaderText = "Họ Tên";
             this.hoTenDataGridViewTextBoxColumn.Name = "hoTenDataGridViewTextBoxColumn";
+            this.hoTenDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // lopDataGridViewTextBoxColumn
             // 
             this.lopDataGridViewTextBoxColumn.DataPropertyName = "Lop";
             this.lopDataGridViewTextBoxColumn.HeaderText = "Lớp";
             this.lopDataGridViewTextBoxColumn.Name = "lopDataGridViewTextBoxColumn";
+            this.lopDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // diaChiDataGridViewTextBoxColumn
             // 
             this.diaChiDataGridViewTextBoxColumn.DataPropertyName = "DiaChi";
             this.diaChiDataGridViewTextBoxColumn.HeaderText = "Địa Chỉ";
             this.diaChiDataGridViewTextBoxColumn.Name = "diaChiDataGridViewTextBoxColumn";
+            this.diaChiDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ngaySinhDataGridViewTextBoxColumn
             // 
@@ -179,39 +234,11 @@
             this.gioiTinhDataGridViewCheckBoxColumn.DataPropertyName = "GioiTinh";
             this.gioiTinhDataGridViewCheckBoxColumn.HeaderText = "Nữ";
             this.gioiTinhDataGridViewCheckBoxColumn.Name = "gioiTinhDataGridViewCheckBoxColumn";
+            this.gioiTinhDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // sinhVienBindingSource
             // 
             this.sinhVienBindingSource.DataSource = typeof(DTO.SinhVien);
-            // 
-            // comboBox_TimSinhVien
-            // 
-            this.comboBox_TimSinhVien.FormattingEnabled = true;
-            this.comboBox_TimSinhVien.Items.AddRange(new object[] {
-            "Mã SV",
-            "Họ và tên",
-            "Lớp"});
-            this.comboBox_TimSinhVien.Location = new System.Drawing.Point(4, 4);
-            this.comboBox_TimSinhVien.Name = "comboBox_TimSinhVien";
-            this.comboBox_TimSinhVien.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_TimSinhVien.TabIndex = 1;
-            // 
-            // textBox_TimSinhVien
-            // 
-            this.textBox_TimSinhVien.Location = new System.Drawing.Point(133, 4);
-            this.textBox_TimSinhVien.Name = "textBox_TimSinhVien";
-            this.textBox_TimSinhVien.Size = new System.Drawing.Size(429, 20);
-            this.textBox_TimSinhVien.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(568, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Tìm";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // sinhVienBindingSource1
             // 
@@ -257,6 +284,8 @@
         private System.Windows.Forms.TextBox textBox_TimSinhVien;
         private System.Windows.Forms.ComboBox comboBox_TimSinhVien;
         private System.Windows.Forms.BindingSource sinhVienBindingSource1;
+        private System.Windows.Forms.Button button_NaviNhaCungCap;
+        private System.Windows.Forms.Button button_NaviHoaDon;
     }
 }
 

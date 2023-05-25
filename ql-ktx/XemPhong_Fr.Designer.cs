@@ -30,12 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_SaveXemPhong = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button_Tinh = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox_TongTien = new System.Windows.Forms.TextBox();
+            this.textBox_SoSV = new System.Windows.Forms.TextBox();
+            this.textBox_ChiPhiPhong = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.button_GuiMail = new System.Windows.Forms.Button();
@@ -59,8 +60,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textBox_MangChiPhi = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox_MangGoiCuoc = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBox_Nuoc = new System.Windows.Forms.GroupBox();
             this.textBox_NuocThanhTien = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -81,7 +80,6 @@
             this.textBox_DienChiSoCu = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.sinhVienBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button_SaveXemPhong = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel_DsSinhVien.SuspendLayout();
@@ -109,13 +107,23 @@
             this.panel1.Size = new System.Drawing.Size(776, 426);
             this.panel1.TabIndex = 0;
             // 
+            // button_SaveXemPhong
+            // 
+            this.button_SaveXemPhong.Location = new System.Drawing.Point(121, 108);
+            this.button_SaveXemPhong.Name = "button_SaveXemPhong";
+            this.button_SaveXemPhong.Size = new System.Drawing.Size(75, 23);
+            this.button_SaveXemPhong.TabIndex = 10;
+            this.button_SaveXemPhong.Text = "Lưu";
+            this.button_SaveXemPhong.UseVisualStyleBackColor = true;
+            this.button_SaveXemPhong.Click += new System.EventHandler(this.button_SaveXemPhong_Click);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.button_Tinh);
             this.panel2.Controls.Add(this.label13);
-            this.panel2.Controls.Add(this.textBox13);
-            this.panel2.Controls.Add(this.textBox12);
-            this.panel2.Controls.Add(this.textBox11);
+            this.panel2.Controls.Add(this.textBox_TongTien);
+            this.panel2.Controls.Add(this.textBox_SoSV);
+            this.panel2.Controls.Add(this.textBox_ChiPhiPhong);
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Location = new System.Drawing.Point(621, 4);
@@ -131,6 +139,7 @@
             this.button_Tinh.TabIndex = 6;
             this.button_Tinh.Text = "Tính";
             this.button_Tinh.UseVisualStyleBackColor = true;
+            this.button_Tinh.Click += new System.EventHandler(this.button_Tinh_Click);
             // 
             // label13
             // 
@@ -141,26 +150,27 @@
             this.label13.TabIndex = 5;
             this.label13.Text = "Tổng tiền";
             // 
-            // textBox13
+            // textBox_TongTien
             // 
-            this.textBox13.Location = new System.Drawing.Point(7, 141);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(142, 20);
-            this.textBox13.TabIndex = 4;
+            this.textBox_TongTien.Enabled = false;
+            this.textBox_TongTien.Location = new System.Drawing.Point(7, 141);
+            this.textBox_TongTien.Name = "textBox_TongTien";
+            this.textBox_TongTien.Size = new System.Drawing.Size(142, 20);
+            this.textBox_TongTien.TabIndex = 4;
             // 
-            // textBox12
+            // textBox_SoSV
             // 
-            this.textBox12.Location = new System.Drawing.Point(7, 19);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(142, 20);
-            this.textBox12.TabIndex = 3;
+            this.textBox_SoSV.Location = new System.Drawing.Point(7, 19);
+            this.textBox_SoSV.Name = "textBox_SoSV";
+            this.textBox_SoSV.Size = new System.Drawing.Size(142, 20);
+            this.textBox_SoSV.TabIndex = 3;
             // 
-            // textBox11
+            // textBox_ChiPhiPhong
             // 
-            this.textBox11.Location = new System.Drawing.Point(7, 67);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(142, 20);
-            this.textBox11.TabIndex = 2;
+            this.textBox_ChiPhiPhong.Location = new System.Drawing.Point(7, 67);
+            this.textBox_ChiPhiPhong.Name = "textBox_ChiPhiPhong";
+            this.textBox_ChiPhiPhong.Size = new System.Drawing.Size(142, 20);
+            this.textBox_ChiPhiPhong.TabIndex = 2;
             // 
             // label12
             // 
@@ -293,8 +303,6 @@
             this.groupBox_Mang.Controls.Add(this.groupBox3);
             this.groupBox_Mang.Controls.Add(this.textBox_MangChiPhi);
             this.groupBox_Mang.Controls.Add(this.label9);
-            this.groupBox_Mang.Controls.Add(this.textBox_MangGoiCuoc);
-            this.groupBox_Mang.Controls.Add(this.label10);
             this.groupBox_Mang.Location = new System.Drawing.Point(415, 3);
             this.groupBox_Mang.Name = "groupBox_Mang";
             this.groupBox_Mang.Size = new System.Drawing.Size(200, 100);
@@ -362,22 +370,6 @@
             this.label9.Size = new System.Drawing.Size(41, 13);
             this.label9.TabIndex = 2;
             this.label9.Text = "Chi phí";
-            // 
-            // textBox_MangGoiCuoc
-            // 
-            this.textBox_MangGoiCuoc.Location = new System.Drawing.Point(75, 17);
-            this.textBox_MangGoiCuoc.Name = "textBox_MangGoiCuoc";
-            this.textBox_MangGoiCuoc.Size = new System.Drawing.Size(118, 20);
-            this.textBox_MangGoiCuoc.TabIndex = 1;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 20);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 13);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Gói cước";
             // 
             // groupBox_Nuoc
             // 
@@ -527,6 +519,7 @@
             this.textBox_DienChiSoMoi.Name = "textBox_DienChiSoMoi";
             this.textBox_DienChiSoMoi.Size = new System.Drawing.Size(118, 20);
             this.textBox_DienChiSoMoi.TabIndex = 3;
+            this.textBox_DienChiSoMoi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_DienChiSoMoi_KeyPress);
             // 
             // label2
             // 
@@ -556,15 +549,6 @@
             // sinhVienBindingSource
             // 
             this.sinhVienBindingSource.DataSource = typeof(DTO.SinhVien);
-            // 
-            // button_SaveXemPhong
-            // 
-            this.button_SaveXemPhong.Location = new System.Drawing.Point(121, 108);
-            this.button_SaveXemPhong.Name = "button_SaveXemPhong";
-            this.button_SaveXemPhong.Size = new System.Drawing.Size(75, 23);
-            this.button_SaveXemPhong.TabIndex = 10;
-            this.button_SaveXemPhong.Text = "Lưu";
-            this.button_SaveXemPhong.UseVisualStyleBackColor = true;
             // 
             // XemPhong_Fr
             // 
@@ -618,8 +602,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox_MangChiPhi;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox_MangGoiCuoc;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label5;
@@ -639,9 +621,9 @@
         private System.Windows.Forms.BindingSource hopDongBindingSource;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox_TongTien;
+        private System.Windows.Forms.TextBox textBox_SoSV;
+        private System.Windows.Forms.TextBox textBox_ChiPhiPhong;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button_GuiMail;

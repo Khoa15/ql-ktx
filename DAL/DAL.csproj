@@ -44,6 +44,8 @@
     <Compile Include="Database.cs" />
     <Compile Include="DayPhong_DAL.cs" />
     <Compile Include="DichVu_DAL.cs" />
+    <Compile Include="Dien_DAL.cs" />
+    <Compile Include="HoaDon_DAL.cs" />
     <Compile Include="HopDong_DAL.cs" />
     <Compile Include="NhaCungCap_DAL.cs" />
     <Compile Include="Phong_DAL.cs" />
