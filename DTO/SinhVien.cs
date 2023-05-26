@@ -36,6 +36,7 @@ namespace DTO
             this.diaChi = hd.diaChi;
             this.ngaySinh = hd.ngaySinh;
             this.gioiTinh= hd.gioiTinh;
+            this.Email = hd.Email;
         }
 
         public int MaSV { get => maSV; set => maSV = value; }

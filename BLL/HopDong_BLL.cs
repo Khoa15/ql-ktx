@@ -36,7 +36,11 @@ namespace BLL
             List<SinhVien> dsSinhVien = sinhVien_dal.Load();
             if(dsSinhVien.Exists(sv => hd.MaSV == sv.MaSV) == false)
             {
-                sinhVien_dal.Insert(hd);
+                hd.MaSV = sinhVien_dal.Insert(hd);
+                if(hd.MaSV == 0)
+                {
+                    hd.MaSV = -1;
+                }
             }
             phong_dal = null;
             return hopDong.Save(hd);
@@ -48,7 +52,7 @@ namespace BLL
             if(hd.Lop.Length == 0) return false;
             if(hd.DiaChi.Length == 0) return false;
             if(hd.TenPhong.Length == 0) return false;
-            
+            return false;
         }
     }
 }

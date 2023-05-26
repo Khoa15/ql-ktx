@@ -19,6 +19,9 @@ namespace ql_ktx
         public ThemSuaHopDong_Fr()
         {
             InitializeComponent();
+            hopDong = new HopDong();
+            hopDong.MaSV = -1;
+            hopDong.MaHD = -1;
         }
         public ThemSuaHopDong_Fr(HopDong hd)
         {
@@ -34,7 +37,7 @@ namespace ql_ktx
         private void ThemHopDong_Fr_Load(object sender, EventArgs e)
         {
             loadPhong();
-            if(hopDong != null)
+            if(hopDong.MaHD != -1)
             {
                 textBox_MaSV.Text = hopDong.MaSV.ToString();
                 textBox_HoVaTen.Text = hopDong.HoTen.ToString();
@@ -45,6 +48,7 @@ namespace ql_ktx
                 dateTimePicker_NgayBatDau.Text = hopDong.NgayBatDau.ToString();
                 dateTimePicker_NgayHetHan.Text = hopDong.NgayHetHan.ToString();
                 comboBox_TrangThai.SelectedIndex = hopDong.TrangThai;
+                textBox_Email.Text = hopDong.Email;
             }
         }
 
@@ -83,24 +87,31 @@ namespace ql_ktx
 
         private void button_LuuHopDong_Click(object sender, EventArgs e)
         {
-            HopDong hd = new HopDong();
-            hd.MaHD = ((hopDong == null) ? -1 : hopDong.MaHD);
-            hd.MaSV = ((textBox_MaSV.Text.Length == 0) ? -1 : int.Parse(textBox_MaSV.Text));
-            hd.HoTen = textBox_HoVaTen.Text;
-            hd.Email = textBox_Email.Text;
-            hd.Lop = textBox_Lop.Text;
-            hd.DiaChi = richTextBox_DiaChi.Text;
-            hd.NgaySinh = DateTime.ParseExact(dateTimePicker_NgaySinh.Text, "dd/MM/yyyy", CultureInfo.CurrentCulture);
-            hd.NgayBatDau = DateTime.ParseExact(dateTimePicker_NgayBatDau.Text, "dd/MM/yyyy", CultureInfo.CurrentCulture);
-            hd.NgayHetHan = DateTime.ParseExact(dateTimePicker_NgayHetHan.Text, "dd/MM/yyyy", CultureInfo.CurrentCulture);
+            if(textBox_HoVaTen.Text.Length == 0 ||
+                textBox_Email.Text.Length == 0 ||
+                textBox_Lop.Text.Length == 0 ||
+                richTextBox_DiaChi.Text.Length == 0 ||
+                textBox_TenPhong.Text.Length == 0 )
+            {
+                MessageBox.Show("Cần điền đầy đủ thông tin");
+                return;
+            }
+
+            hopDong.HoTen = textBox_HoVaTen.Text;
+            hopDong.Email = textBox_Email.Text;
+            hopDong.Lop = textBox_Lop.Text;
+            hopDong.DiaChi = richTextBox_DiaChi.Text;
+            hopDong.NgaySinh = DateTime.ParseExact(dateTimePicker_NgaySinh.Text, "dd/MM/yyyy", CultureInfo.CurrentCulture);
+            hopDong.NgayBatDau = DateTime.ParseExact(dateTimePicker_NgayBatDau.Text, "dd/MM/yyyy", CultureInfo.CurrentCulture);
+            hopDong.NgayHetHan = DateTime.ParseExact(dateTimePicker_NgayHetHan.Text, "dd/MM/yyyy", CultureInfo.CurrentCulture);
             Phong phong = new Phong(textBox_TenPhong.Text);
-            hd.MaPhong = phong.MaPhong;
-            hd.MaDay = phong.MaDay;
-            hd.Tang = phong.Tang;
-            hd.TrangThai = comboBox_TrangThai.SelectedIndex;
-            hd.TenPhong = textBox_TenPhong.Text;
+            hopDong.MaPhong = phong.MaPhong;
+            hopDong.MaDay = phong.MaDay;
+            hopDong.Tang = phong.Tang;
+            hopDong.TrangThai = comboBox_TrangThai.SelectedIndex;
+            hopDong.TenPhong = textBox_TenPhong.Text;
             HopDong_BLL hd_bll = new HopDong_BLL();
-            if (hd_bll.Save(hd) != 0)
+            if (hd_bll.Save(hopDong) != 0)
             {
                 MessageBox.Show("Đã lưu hợp đồng!");
                 loadPhong();

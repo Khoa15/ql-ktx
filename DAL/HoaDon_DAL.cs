@@ -40,7 +40,7 @@ namespace DAL
             dsHoaDon.Clear();
             //string sql = $"SELECT * FROM DICHVU INNER JOIN DIEN_NUOC ON DIEN_NUOC.MA_DICHVU = DICHVU.MA INNER JOIN HOADON ON HOADON.MA_DICHVU = DICHVU.MA WHERE MONTH(HOADON.NGAYCAP) = 5 AND DICHVU.MA_PHONG = {MaPhong} AND DICHVU.MA_DAY = {MaDay} AND DICHVU.TANG = {Tang}";
             //string sql = $"SELECT CHISO, NGAY FROM DIEN_NUOC WHERE MONTH(NGAY) = {DateTime.Now.Month.ToString()}";
-            string sql = $"SELECT DISTINCT MA_PHONG, MA_DAY, TANG, LOAI, CHISO FROM DICHVU INNER JOIN DIEN_NUOC ON DIEN_NUOC.MA_DICHVU = DICHVU.MA WHERE MONTH(DIEN_NUOC.NGAY) >= {DateTime.Now.Month.ToString()} AND DICHVU.MA_PHONG = {MaPhong} AND DICHVU.MA_DAY = {MaDay} AND DICHVU.TANG = {Tang}";
+            string sql = $"SELECT DISTINCT DICHVU.MA, MA_PHONG, MA_DAY, TANG, LOAI, CHISO FROM DICHVU INNER JOIN DIEN_NUOC ON DIEN_NUOC.MA_DICHVU = DICHVU.MA WHERE MONTH(DIEN_NUOC.NGAY) >= {DateTime.Now.Month.ToString()} AND DICHVU.MA_PHONG = {MaPhong} AND DICHVU.MA_DAY = {MaDay} AND DICHVU.TANG = {Tang}";
             Database db = new Database();
             db.Conn.Open();
             SqlCommand cmd = new SqlCommand(sql, db.Conn);
@@ -48,6 +48,7 @@ namespace DAL
             while (rd.Read())
             {
                 HoaDon hd = new HoaDon();
+                hd.Ma_DichVu = rd["MA"].ToString();
                 hd.Loai = bool.Parse(rd["Loai"].ToString());
                 hd.MaPhong = int.Parse(rd["MA_PHONG"].ToString());
                 hd.MaDay = int.Parse(rd["MA_DAY"].ToString());

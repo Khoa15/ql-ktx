@@ -87,10 +87,22 @@ namespace DAL
         {
             Database db = new Database();
             db.Conn.Open();
-            string sql = $"INSERT INTO SINHVIEN ([HOTEN] ,[DIACHI] ,[GIOITINH] ,[NGAYSINH] ,[LOP], [EMAIL]) VALUES (N'{sv.HoTen}', N'{sv.DiaChi}', {((sv.GioiTinh == true) ? 1 : 0)}, '{sv.NgaySinh.ToShortDateString()}', '{sv.Lop}', '{sv.Email.ToString()}')";
+            string sql = $"INSERT INTO SINHVIEN ([HOTEN] ,[DIACHI] ,[GIOITINH] ,[NGAYSINH] ,[LOP], [EMAIL]) VALUES (N'{sv.HoTen}', N'{sv.DiaChi}', {((sv.GioiTinh == true) ? 1 : 0)}, '{sv.NgaySinh.ToShortDateString()}', '{sv.Lop}', '{sv.Email}')";
             SqlCommand cmd = new SqlCommand(sql, db.Conn);
             int result = cmd.ExecuteNonQuery();
             db.Conn.Close();
+            if (result != 0)
+            {
+                db.Conn.Open();
+                sql = $"SELECT TOP 1 MASV FROM SINHVIEN WHERE EMAIL='{sv.Email}'";
+                cmd = new SqlCommand(sql , db.Conn);
+                SqlDataReader rd = cmd.ExecuteReader();
+                while(rd.Read())
+                {
+                    result = int.Parse(rd["MASV"].ToString());
+                }
+                db.Conn.Close();
+            }
             return result;
         }
     }

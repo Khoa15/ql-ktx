@@ -32,5 +32,10 @@ namespace DTO
         {
             return giaTien * (chiSoMoi - chiSoCu);
         }
+        public string TenLoai()
+        {
+            if (Loai) return "Nước";
+            return "Điện";
+        }
     }
 }

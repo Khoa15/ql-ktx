@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Net.Mail;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL;
 using DTO;
@@ -38,13 +32,15 @@ namespace ql_ktx
                 {
                     textBox_NuocChiSoCu.Text = hd.ChiSoCu.ToString();
                     textBox_NuocChiSoMoi.Text = hd.ChiSoCu.ToString();
-                    textBox_DienThanhTien.Text = thanhTien(hd.ChiSoCu, hd.ChiSoCu, hd.Loai).ToString();
+                    hd.Tongtien = thanhTien(hd.ChiSoCu, hd.ChiSoCu, hd.Loai);
+                    textBox_DienThanhTien.Text = hd.Tongtien.ToString();
                 }
                 else
                 {
                     textBox_DienChiSoCu.Text = hd.ChiSoCu.ToString();
                     textBox_DienChiSoMoi.Text = hd.ChiSoCu.ToString();
-                    textBox_NuocThanhTien.Text = thanhTien(hd.ChiSoCu, hd.ChiSoCu, hd.Loai).ToString();
+                    hd.Tongtien = thanhTien(hd.ChiSoCu, hd.ChiSoCu, hd.Loai);
+                    textBox_NuocThanhTien.Text = hd.Tongtien.ToString();
                 }
                 textBox_MangChiPhi.Text = Mang.Gia.ToString();
                 textBox_SoSV.Text = dsHopDong.Count.ToString();
@@ -62,7 +58,10 @@ namespace ql_ktx
 
         private void button1_Click(object sender, EventArgs e)
         {
-            hoaDon_BLL.SendMail(dsHopDong);
+            if(hoaDon_BLL.SendMail(dsHopDong, dsHoaDon))
+            {
+                MessageBox.Show("Đã gửi mail!");
+            }
         }
 
         private void button_Tinh_Click(object sender, EventArgs e)
@@ -71,7 +70,7 @@ namespace ql_ktx
             int dien_Cu = int.Parse(textBox_DienChiSoCu.Text);
             int nuoc_Moi = int.Parse(textBox_NuocChiSoMoi.Text);
             int nuoc_Cu = int.Parse(textBox_NuocChiSoCu.Text);
-            if (dien_Cu > dien_Moi)
+            if(dien_Cu > dien_Moi)
             {
                 MessageBox.Show("Chỉ số điện không hợp lệ");
                 return;
