@@ -15,6 +15,7 @@ namespace DTO
         string lop;
         string hoTen;
         string diaChi;
+        string email;
         DateTime ngaySinh;
         bool gioiTinh;
         public SinhVien() { }
@@ -43,5 +44,6 @@ namespace DTO
         public string DiaChi { get => diaChi; set => diaChi = value; }
         public DateTime NgaySinh { get => ngaySinh; set => ngaySinh = value; }
         public bool GioiTinh { get => gioiTinh; set => gioiTinh = value; }
+        public string Email { get => email; set => email = value; }
     }
 }

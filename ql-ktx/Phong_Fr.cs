@@ -13,6 +13,7 @@ namespace ql_ktx
 {
     public partial class Phong_Fr : Form
     {
+        List<Phong> dsPhong;
         public Phong_Fr()
         {
             InitializeComponent();

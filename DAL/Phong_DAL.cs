@@ -30,7 +30,7 @@ namespace DAL
                 DsPhong.Add(p);
             }
             db.Conn.Close();
-            rd = db.Select("SELECT PHONG.TENPHONG, COUNT(HOPDONG.MASV) AS SOLUONG FROM PHONG LEFT JOIN HOPDONG ON HOPDONG.MA_PHONG = PHONG.MA AND HOPDONG.MA_DAY = PHONG.MA_DAY AND HOPDONG.TANG = PHONG.TANG GROUP BY (TENPHONG) ORDER BY TENPHONG ASC");
+            rd = db.Select("SELECT PHONG.TENPHONG, COUNT(HOPDONG.MASV) AS SOLUONG FROM PHONG LEFT JOIN HOPDONG ON HOPDONG.MA_PHONG = PHONG.MA AND HOPDONG.MA_DAY = PHONG.MA_DAY AND HOPDONG.TANG = PHONG.TANG WHERE HOPDONG.TRANGTHAI !=0 AND HOPDONG.TRANGTHAI!=3 GROUP BY (TENPHONG) ORDER BY TENPHONG ASC");
             while (rd.Read())
             {
                 DsPhong.Where(phong => phong.TenPhong == rd["TENPHONG"].ToString()).ToList().ForEach(phong => phong.SoSv = int.Parse(rd["SOLUONG"].ToString()));

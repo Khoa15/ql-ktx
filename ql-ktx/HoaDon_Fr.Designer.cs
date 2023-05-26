@@ -1,6 +1,6 @@
 ﻿namespace ql_ktx
 {
-    partial class HoaDon
+    partial class HoaDon_Fr
     {
         /// <summary>
         /// Required designer variable.

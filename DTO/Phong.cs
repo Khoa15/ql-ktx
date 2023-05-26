@@ -28,6 +28,10 @@ namespace DTO
         }
         public Phong(string tenPhong)
         {
+            if(tenPhong.Length == 0)
+            {
+                return;
+            }
             this.MaDay = int.Parse(tenPhong[0].ToString());
             this.tang = int.Parse(tenPhong[1].ToString());
             this.MaPhong = int.Parse(tenPhong.Substring(2));

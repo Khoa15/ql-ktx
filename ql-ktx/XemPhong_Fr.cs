@@ -15,6 +15,7 @@ namespace ql_ktx
 {
     public partial class XemPhong_Fr : Form
     {
+        HoaDon_BLL hoaDon_BLL= new HoaDon_BLL();
         Phong phong;
         List<HopDong> dsHopDong;
         List<HoaDon> dsHoaDon;
@@ -28,8 +29,8 @@ namespace ql_ktx
         {
             HopDong_BLL hopDong_bll = new HopDong_BLL();
             dsHopDong = hopDong_bll.Load(phong);
+            dsHopDong = dsHopDong.Where(hd => hd.TrangThai != 0 && hd.TrangThai != 3).ToList();
             dataGridView_SinhVien.DataSource = dsHopDong;
-            HoaDon_BLL hoaDon_BLL= new HoaDon_BLL();
             dsHoaDon = hoaDon_BLL.Load(phong);
             dsHoaDon.ForEach(hd =>
             {
@@ -61,54 +62,43 @@ namespace ql_ktx
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Create a new SmtpClient object.
-            SmtpClient client = new SmtpClient("smtp.office365.com");
-
-            // Set the port number.
-            client.Port = 587;
-
-            // Set the username and password.
-            client.Credentials = new NetworkCredential("nguyenkhoa72@outlook.com", "baotrung123");
-
-            // Enable SSL.
-            client.EnableSsl = true;
-
-            // Create a new MailMessage object.
-            MailMessage message = new MailMessage();
-
-            // Set the sender.
-            message.From = new MailAddress("nguyenkhoa72@outlook.com");
-
-            // Set the recipient.
-            message.To.Add(new MailAddress("nguyentrongdangkhoa15@gmail.com"));
-
-            // Set the subject.
-            message.Subject = "This is a test email";
-            message.Priority = MailPriority.High;
-            // Set the body.
-            message.Body = "<h1>This is the body of the email.</h1>";
-            message.IsBodyHtml= true;
-            // Send the email.
-            client.Send(message);
-
-            // Display a message to indicate that the email was sent successfully.
-            MessageBox.Show("SuccessFully");
+            hoaDon_BLL.SendMail(dsHopDong);
         }
 
         private void button_Tinh_Click(object sender, EventArgs e)
         {
+            int dien_Moi = int.Parse(textBox_DienChiSoMoi.Text);
+            int dien_Cu = int.Parse(textBox_DienChiSoCu.Text);
+            int nuoc_Moi = int.Parse(textBox_NuocChiSoMoi.Text);
+            int nuoc_Cu = int.Parse(textBox_NuocChiSoCu.Text);
+            if (dien_Cu > dien_Moi)
+            {
+                MessageBox.Show("Chỉ số điện không hợp lệ");
+                return;
+            }
+            if(nuoc_Cu > nuoc_Moi)
+            {
+                MessageBox.Show("Chỉ số nước không hợp lệ");
+                return;
+            }
+            textBox_DienThanhTien.Text = thanhTien(dien_Cu, dien_Moi, false).ToString();
+            textBox_NuocThanhTien.Text = thanhTien(nuoc_Cu, nuoc_Moi, true).ToString();
             textBox_TongTien.Text = String.Format("{0:#,##0}",int.Parse(textBox_DienThanhTien.Text) + int.Parse(textBox_DienThanhTien.Text) + Mang.Gia + dsHopDong.Count * Phong.GiaPhong);
         }
 
         private void button_SaveXemPhong_Click(object sender, EventArgs e)
         {
             
+            hoaDon_BLL.Save(dsHopDong, dsHoaDon);
 
         }
 
         private void textBox_DienChiSoMoi_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+        }
+
+        private void textBox_NuocChiSoMoi_KeyPress(object sender, KeyPressEventArgs e)
+        {
         }
     }
 }

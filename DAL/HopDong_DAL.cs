@@ -78,7 +78,7 @@ namespace DAL
             if (result > 0)
             {
                 db.Conn.Open();
-                sql = $"UPDATE HOPDONG SET TRANGTHAI = {hd.TrangThai}, TUNGAY = '{hd.NgayBatDau.ToShortDateString()}', DENNGAY = '{hd.NgayHetHan.ToShortDateString()}' WHERE MASV = {hd.MaSV} AND MA_PHONG = {hd.MaPhong} AND TANG = {hd.Tang};";
+                sql = $"UPDATE HOPDONG SET TRANGTHAI = {hd.TrangThai}, TUNGAY = '{hd.NgayBatDau.ToShortDateString()}', DENNGAY = '{hd.NgayHetHan.ToShortDateString()}' WHERE MASV = {hd.MaSV} AND MA_PHONG = {hd.MaPhong} AND TANG = {hd.Tang} AND HOPDONG.MA = {hd.MaHD};";
                 sql += $"UPDATE SINHVIEN SET HOTEN = N'{hd.HoTen}', DIACHI = N'{hd.DiaChi}', GIOITINH = {((hd.GioiTinh == true) ? 1 : 0)}, NGAYSINH = '{hd.NgaySinh}', LOP='{hd.Lop}' WHERE MASV = {hd.MaSV}";
                 cmd = new SqlCommand(sql, db.Conn);
                 result = cmd.ExecuteNonQuery() ;

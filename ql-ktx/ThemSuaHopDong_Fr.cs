@@ -67,6 +67,7 @@ namespace ql_ktx
                 textBox_Lop.Text = sinhVien.Lop.ToString();
                 richTextBox_DiaChi.Text = sinhVien.DiaChi.ToString();
                 dateTimePicker_NgaySinh.Text = sinhVien.NgaySinh.ToString();
+                textBox_Email.Text = sinhVien.Email.ToString();
             }
         }
 
@@ -83,8 +84,10 @@ namespace ql_ktx
         private void button_LuuHopDong_Click(object sender, EventArgs e)
         {
             HopDong hd = new HopDong();
-            hd.MaSV = int.Parse(textBox_MaSV.Text);
+            hd.MaHD = ((hopDong == null) ? -1 : hopDong.MaHD);
+            hd.MaSV = ((textBox_MaSV.Text.Length == 0) ? -1 : int.Parse(textBox_MaSV.Text));
             hd.HoTen = textBox_HoVaTen.Text;
+            hd.Email = textBox_Email.Text;
             hd.Lop = textBox_Lop.Text;
             hd.DiaChi = richTextBox_DiaChi.Text;
             hd.NgaySinh = DateTime.ParseExact(dateTimePicker_NgaySinh.Text, "dd/MM/yyyy", CultureInfo.CurrentCulture);

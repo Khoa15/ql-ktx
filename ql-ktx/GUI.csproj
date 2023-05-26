@@ -52,11 +52,11 @@
     <Compile Include="DayPhong_Fr.Designer.cs">
       <DependentUpon>DayPhong_Fr.cs</DependentUpon>
     </Compile>
-    <Compile Include="HoaDon.cs">
+    <Compile Include="HoaDon_Fr.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HoaDon.Designer.cs">
-      <DependentUpon>HoaDon.cs</DependentUpon>
+    <Compile Include="HoaDon_Fr.Designer.cs">
+      <DependentUpon>HoaDon_Fr.cs</DependentUpon>
     </Compile>
     <Compile Include="HopDong_Fr.cs">
       <SubType>Form</SubType>
@@ -93,8 +93,8 @@
     <EmbeddedResource Include="DayPhong_Fr.resx">
       <DependentUpon>DayPhong_Fr.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HoaDon.resx">
-      <DependentUpon>HoaDon.cs</DependentUpon>
+    <EmbeddedResource Include="HoaDon_Fr.resx">
+      <DependentUpon>HoaDon_Fr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HopDong_Fr.resx">
       <DependentUpon>HopDong_Fr.cs</DependentUpon>

@@ -41,5 +41,14 @@ namespace BLL
             phong_dal = null;
             return hopDong.Save(hd);
         }
+        public bool NotEmpty(HopDong hd)
+        {
+            if(hd.Email.Length  == 0) return false;
+            if(hd.HoTen.Length == 0) return false;
+            if(hd.Lop.Length == 0) return false;
+            if(hd.DiaChi.Length == 0) return false;
+            if(hd.TenPhong.Length == 0) return false;
+            
+        }
     }
 }

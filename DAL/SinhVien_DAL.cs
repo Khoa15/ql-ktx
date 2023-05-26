@@ -15,7 +15,7 @@ namespace DAL
         {
             dsSinhVien.Clear();
             Database db = new Database();
-            SqlDataReader rd = db.Select("SELECT MaSV, HoTen, DiaChi, GioiTinh, LOP, NgaySinh FROM SINHVIEN");
+            SqlDataReader rd = db.Select("SELECT MaSV, HoTen, DiaChi, GioiTinh, LOP, NgaySinh, Email FROM SINHVIEN");
             while(rd.Read())
             {
                 SinhVien sv = new SinhVien();
@@ -25,6 +25,7 @@ namespace DAL
                 sv.GioiTinh = bool.Parse(rd["GioiTinh"].ToString());
                 sv.NgaySinh = DateTime.Parse(rd["NgaySinh"].ToString());
                 sv.Lop = rd["Lop"].ToString();
+                sv.Email = rd["EMAIL"].ToString();
                 dsSinhVien.Add(sv);
             }
             db.Close();
@@ -86,7 +87,7 @@ namespace DAL
         {
             Database db = new Database();
             db.Conn.Open();
-            string sql = $"INSERT INTO SINHVIEN ([HOTEN] ,[DIACHI] ,[GIOITINH] ,[NGAYSINH] ,[LOP]) VALUES (N'{sv.HoTen}', N'{sv.DiaChi}', {((sv.GioiTinh == true) ? 1 : 0)}, '{sv.NgaySinh.ToShortDateString()}', '{sv.Lop}')";
+            string sql = $"INSERT INTO SINHVIEN ([HOTEN] ,[DIACHI] ,[GIOITINH] ,[NGAYSINH] ,[LOP], [EMAIL]) VALUES (N'{sv.HoTen}', N'{sv.DiaChi}', {((sv.GioiTinh == true) ? 1 : 0)}, '{sv.NgaySinh.ToShortDateString()}', '{sv.Lop}', '{sv.Email.ToString()}')";
             SqlCommand cmd = new SqlCommand(sql, db.Conn);
             int result = cmd.ExecuteNonQuery();
             db.Conn.Close();

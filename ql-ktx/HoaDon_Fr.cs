@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ql_ktx
 {
-    public partial class HoaDon : Form
+    public partial class HoaDon_Fr : Form
     {
-        public HoaDon()
+        public HoaDon_Fr()
         {
             InitializeComponent();
         }
