@@ -9,7 +9,7 @@ namespace DAL
 {
     public class Database
     {
-        string strcon = @"Data Source=Mun\SQLEXPRESS;Initial Catalog=QL_KTX_OWN;Integrated Security=True";
+        string strcon = @"Data Source=DESKTOP-L3D0UJ9\SQLEXPRESS;Initial Catalog=QL_KTX_OWN;Integrated Security=True";
         SqlConnection conn;
         public Database() {
             Conn = new SqlConnection(strcon);

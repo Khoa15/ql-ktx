@@ -16,7 +16,7 @@ namespace ql_ktx
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new mainFormKTX());
+            Application.Run(new Login());
         }
     }
 }

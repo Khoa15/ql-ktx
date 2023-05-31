@@ -30,7 +30,7 @@ namespace BLL
         {
             return this.Load(phong.MaPhong, phong.MaDay, phong.Tang);
         }
-        public bool SendMail(List<HopDong> dsHopDong, List<HoaDon> dsHoaDon)
+        public bool SendMail(List<HopDong> dsHopDong, List<HoaDon> dsHoaDon, int TongTien)
         {
             SmtpClient client = new SmtpClient("smtp.office365.com");
 
@@ -55,18 +55,31 @@ namespace BLL
             string html = "";
             dsHopDong.ForEach(hd =>
             {
-                html += Node("Ma", hd.MaSV.ToString());
+                html += Node("Mã", hd.MaSV.ToString());
                 html += Node("Họ và tên", hd.HoTen);
-                html += Node("Lop", hd.Lop);
+                html += Node("Lớp", hd.Lop);
             });
             dsHoaDon.ForEach((hd) =>
             {
-                html += Node("Loại", hd.TenLoai());
+                if(hd.Loai == true)
+                {
+                    html += Node("Loại", "Nước");
+                }
+                else
+                {
+                    html += Node("Loại", "Điện");
+                }
                 html += Node("Chỉ số cũ: ", hd.ChiSoCu.ToString());
-                html += Node("Chỉ số cũ: ", hd.ChiSoMoi.ToString());
+                html += Node("Chỉ số mới: ", hd.ChiSoMoi.ToString());
                 html += Node("Thành tiền: ", hd.Tongtien.ToString());
             });
-            
+
+            html += Node("Wifi: ", Mang.Gia.ToString());
+
+            html += Node("Số người: ", dsHopDong.Count().ToString());
+            html += Node("Tiền phòng: ", Phong.GiaPhong.ToString());
+            html += Node("Tổng cộng: ", TongTien.ToString());
+
             message.Body = html;
             message.IsBodyHtml = true;
             client.Send(message);

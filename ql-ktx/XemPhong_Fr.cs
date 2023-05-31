@@ -58,7 +58,18 @@ namespace ql_ktx
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(hoaDon_BLL.SendMail(dsHopDong, dsHoaDon))
+            dsHoaDon.ForEach(hd =>
+            {
+                if (hd.Loai == true)
+                {
+                    hd.ChiSoMoi = Convert.ToInt32(textBox_NuocChiSoMoi.Text);
+                }
+                else
+                {
+                    hd.ChiSoMoi = Convert.ToInt32(textBox_DienChiSoMoi.Text);
+                }
+            });
+            if (hoaDon_BLL.SendMail(dsHopDong, dsHoaDon, Convert.ToInt32(textBox_TongTien.Text)))
             {
                 MessageBox.Show("Đã gửi mail!");
             }
@@ -98,6 +109,11 @@ namespace ql_ktx
 
         private void textBox_NuocChiSoMoi_KeyPress(object sender, KeyPressEventArgs e)
         {
+        }
+
+        private void textBox_DienChiSoMoi_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
