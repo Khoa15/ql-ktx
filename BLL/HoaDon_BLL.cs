@@ -36,13 +36,13 @@ namespace BLL
 
             client.Port = 587;
 
-            client.Credentials = new NetworkCredential("nguyenkhoa72@outlook.com", "TK2dTdnbCKacaH3QXqb7BXab9CmngVvGBJ9gmMCj");
+            client.Credentials = new NetworkCredential("email", "email");
 
             client.EnableSsl = true;
 
             MailMessage message = new MailMessage();
 
-            message.From = new MailAddress("nguyenkhoa72@outlook.com");
+            message.From = new MailAddress("email");
             List<string> emails = dsHopDong.Select(hd => hd.Email).ToList();
             emails.ForEach(email =>
             {
